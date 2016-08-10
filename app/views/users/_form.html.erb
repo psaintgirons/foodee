@@ -1,0 +1,52 @@
+<div class="row">
+  <h1 class="page-header"><%= title %></h1>
+
+  <div class="col-xs-12">
+    <%= render 'shared/errors', model: user %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= form_for user do |f| %>
+          <div class="form-group">
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control'  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control'  %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, class: 'form-control'  %>
+          </div>
+          <% if user.new_record? %>
+            <div class="form-group">
+              <%= f.label :profile %>
+              <label class="radio-inline">
+                <%= f.radio_button :profile, :administrator %> Administrator
+              </label>
+              <label class="radio-inline">
+                <%= f.radio_button :profile, :waiter %> Waiter
+              </label>
+            </div>
+          <% else %>
+            <div class="form-group">
+              <%= f.label :password %>
+              <%= f.password_field :password, class: 'form-control'  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :confirm_password %>
+              <%= f.password_field :confirm_password, class: 'form-control'  %>
+            </div>
+            <div class="form-group">
+              <%= f.label :current_password %> <p class='help-block'>(we need your current password to confirm your changes)</p>
+              <%= f.password_field :current_password, class: 'form-control' %>
+            </div>
+          <% end %>
+          <div class="form-group">
+            <%= f.submit class: 'btn btn-primary pull-right' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

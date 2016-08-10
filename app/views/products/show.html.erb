@@ -1,0 +1,43 @@
+<di class="row">
+  <h1 class="page-header">
+    <%= @product.name.titleize %>
+    <div class="pull-right">
+      <div class="btn-group">
+        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= fa_icon 'cog' %> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><%= link_to fa_icon('pencil', text: 'Edit'), edit_product_path(@product) %></li>
+          <li class="divider"></li>
+          <li><%= link_to fa_icon('trash-o', text: 'Delete'), @product, method: :delete, remote: true, data: { confirm: 'Are you sure?' }  %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </h1>
+
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table table-striped">
+          <tr>
+            <td><strong>Description</strong></td>
+            <td><%= @product.description %></td>
+          </tr>
+          <tr>
+            <td><strong>Type</strong></td>
+            <td><%= @product.display_type.to_s.titleize %></td>
+          </tr>
+          <tr>
+            <td><strong>Price</strong></td>
+            <td><%= number_to_currency @product.price %></td>
+          </tr>
+          <tr>
+            <td><strong>Category</strong></td>
+            <td><%= @product.category %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</di>

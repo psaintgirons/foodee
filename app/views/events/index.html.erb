@@ -1,0 +1,51 @@
+<div class="row">
+  <h1 class="page-header">List of Events</h1>
+
+  <div class="col-xs-12 col-sm-3">
+    <div class="panel panel-default">
+      <div class="panel-heading"><%= fa_icon 'filter', text: 'Filters' %></div>
+      <div class="panel-body">
+        <%= form_for_filterrific @filterrific, remote: true, html: { id: 'filterrific-no-ajax-auto-submit' } do |f| %>
+          <div class="form-group">
+            <%= f.label :title %>
+            <%= f.text_field :with_title, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :from %>
+            <%= f.text_field :with_date_gte, class: 'form-control filter-date' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :to %>
+            <%= f.text_field :with_date_lte, class: 'form-control filter-date' %>
+          </div>
+          <hr>
+          <%= button_tag type: 'submit', class: 'btn btn-success btn-block' do %>
+            <%= fa_icon 'search', text: 'Search' %>
+          <% end %>
+          <%= link_to fa_icon('refresh', text: 'Reset'), reset_filterrific_url, class: 'btn btn-default btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-sm-9">
+    <div class="pull-right">
+      <% if can? :new, Event %>
+        <%= link_to new_event_path, class: 'btn btn-info' do %>
+          <%= fa_icon 'calendar', text: 'New Event'%>
+        <% end %>
+      <% end %>
+      <% if can? :report, Event %>
+        <%= link_to report_events_path, class: 'btn btn-danger', target: '_blank' do %>
+          <%= fa_icon 'file-pdf-o', text: 'Report'%>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= render 'list', events: @events %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Restaurant" %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "application_main", :media => "all" %>
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <%= javascript_include_tag "application_main" %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="fh5co-container">
+      <%= bootstrap_flash %>
+      <%= yield %>
+      <div id="fh5co-contact" data-section="reservation">
+        <div class="container">
+          <div class="row text-center fh5co-heading row-padded">
+            <div class="col-md-8 col-md-offset-2">
+              <h2 class="heading to-animate">Reserve Now!</h2>
+              <p class="sub-heading to-animate">Your table is waiting</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 to-animate-2">
+              <h3>Contact Info</h3>
+              <ul class="fh5co-contact-info">
+                <li class="fh5co-contact-address ">
+                  <i class="icon-home"></i>
+                  5555 Love Paradise 56 New Clity 5655, <br>Excel Tower United Kingdom
+                </li>
+                <li><i class="icon-phone"></i> (123) 465-6789</li>
+                <li><i class="icon-envelope"></i>info@freehtml5.co</li>
+                <li><i class="icon-globe"></i> <a href="http://freehtml5.co/" target="_blank">freehtml5.co</a></li>
+              </ul>
+            </div>
+            <div class="col-md-6 to-animate-2">
+              <h3>Reservation Form</h3>
+              <div id="reservation_result"></div>
+              <%= form_for @reservation, remote: true do |f| %>
+                <%= f.fields_for :user do |u| %>
+                  <div class="form-group ">
+                    <%= u.text_field :first_name, class: 'form-control', placeholder: 'First Name' %>
+                  </div>
+                  <div class="form-group ">
+                    <%= u.text_field :last_name, class: 'form-control', placeholder: 'Last Name' %>
+                  </div>
+                  <div class="form-group ">
+                    <%= u.email_field :email, class: 'form-control', placeholder: 'Email' %>
+                  </div>
+                <% end %>
+                <div class="form-group">
+                  <%= f.select :occation, Reservation::OCCATIONS, { include_blank: 'Select an Occation' }, { class: 'form-control' } %>
+                </div>
+                <div class="form-group ">
+                  <%= f.text_field :reserved_at, class: 'form-control date', placeholder: 'Date & Time' %>
+                </div>
+                <div class="form-group ">
+                  <%= f.text_area :message, class: 'form-control', placeholder: 'Message' %>
+                </div>
+                <div class="form-group ">
+                  <%= f.submit 'Make the reservation', class: 'btn btn-primary' %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="fh5co-footer">
+      <div class="container">
+        <div class="row row-padded">
+          <div class="col-md-12 text-center">
+            <p class="to-animate">&copy; 2016 Foodee Free HTML5 Template. <br> Designed by <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> Demo Images: <a href="http://pexels.com/" target="_blank">Pexels</a> <br> Tasty Icons Free <a href="http://handdrawngoods.com/store/tasty-icons-free-food-icons/" target="_blank">handdrawngoods</a>
+            </p>
+            <p class="text-center to-animate"><a href="#" class="js-gotop">Go To Top</a></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <ul class="fh5co-social">
+              <li class="to-animate-2"><a href="#"><i class="icon-facebook"></i></a></li>
+              <li class="to-animate-2"><a href="#"><i class="icon-twitter"></i></a></li>
+              <li class="to-animate-2"><a href="#"><i class="icon-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

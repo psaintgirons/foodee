@@ -1,0 +1,40 @@
+<div class="js-sticky">
+  <div class="fh5co-main-nav">
+    <div class="container-fluid">
+      <div class="fh5co-menu-1">
+        <a href="#" data-nav-section="menu">Menu</a>
+      </div>
+      <div class="fh5co-logo">
+        <%= link_to 'foode', root_path %>
+      </div>
+      <div class="fh5co-menu-2">
+        <a href="#" data-nav-section="reservation">Reservation</a>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render 'layouts/features', featured_dishes: @featured_dishes %>
+<div id="fh5co-menus" data-section="menu">
+  <div class="container">
+    <div class="row text-center fh5co-heading row-padded">
+      <div class="col-md-8 col-md-offset-2">
+        <h2 class="heading to-animate">Food Menu</h2>
+        <p class="sub-heading to-animate">Eat, Drink and Have Fun.</p>
+      </div>
+    </div>
+    <div class="row row-padded">
+      <% @menu.each do |category, products| %>
+        <div class="col-xs-12">
+          <div class="fh5co-food-menu to-animate-2">
+            <h2><%= category %></h2>
+            <ul>
+              <% products.each do |product| %>
+                <%= menu_item product %>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

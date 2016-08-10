@@ -1,0 +1,43 @@
+<div id="filterrific_results">
+  <div class="text-center">
+    <%= page_entries_info products %>
+  </div>
+  <table class="table table-stripped">
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th class="text-center">Type</th>
+      <th class="text-center">Price</th>
+      <th class="text-center">Category</th>
+      <th class="text-center">Actions</th>
+    </thead>
+    <tbody>
+      <% products.each do |product| %>
+        <tr>
+          <td><%= product.name.titleize %></td>
+          <td><%= truncate product.description, length: 50 %></td>
+          <td class='text-center'><%= product.display_type.to_s.titleize %></td>
+          <td class='text-center'><%= number_to_currency product.price %></td>
+          <td class='text-center'><%= product.category %></td>
+          <td class='text-center'>
+            <div class="btn-group">
+              <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= fa_icon 'cog' %> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><%= link_to fa_icon('eye', text: 'Display'), product%></li>
+                <li class="divider"></li>
+                <li><%= link_to fa_icon('pencil', text: 'Edit'), edit_product_path(product) %></li>
+                <li class="divider"></li>
+                <li><%= link_to fa_icon('trash-o', text: 'Delete'), product, method: :delete, remote: true, data: { confirm: 'Are you sure?' }  %></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="text-center">
+    <%= paginate products, theme: 'twitter-bootstrap-3'  %>
+  </div>
+</div>

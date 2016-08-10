@@ -1,0 +1,41 @@
+<div id="filterrific_results">
+  <div class="text-center">
+    <%= page_entries_info reservations %>
+  </div>
+  <table class="table table-stripped">
+    <thead>
+      <th class="text-center">Date</th>
+      <th class="text-center">Name</th>
+      <th class="text-center">Occation</th>
+      <th class="text-center">Message</th>
+      <th class="text-center">Actions</th>
+    </thead>
+    <tbody>
+      <% reservations.each do |reservation| %>
+        <tr>
+          <td class='text-center'><%= l reservation.reserved_at, format: :short %></td>
+          <td><%= reservation.user.full_name %></td>
+          <td class='text-center'><%= reservation.occation.to_s.titleize %></td>
+          <td><%= truncate reservation.message, length: 50 %></td>
+          <td class='text-center'>
+            <div class="btn-group">
+              <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <%= fa_icon 'cog' %> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li><%= link_to fa_icon('eye', text: 'Display'), reservation%></li>
+                <% if can? :destroy, reservation %>
+                  <li class="divider"></li>
+                  <li><%= link_to fa_icon('trash-o', text: 'Delete'), reservation, method: :delete, remote: true, data: { confirm: 'Are you sure?' }  %></li>
+                <% end %>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="text-center">
+    <%= paginate reservations, theme: 'twitter-bootstrap-3'  %>
+  </div>
+</div>
